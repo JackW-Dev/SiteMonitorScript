@@ -5,7 +5,8 @@ from threading import Thread
 from win10toast import ToastNotifier
 
 # URL to monitor
-url = Request('https://staticdress.bigcartel.com/', headers={'User-Agent': 'Mozilla/5.0'})
+url = Request(url='https://google.com/',
+    headers={'User-Agent': 'Mozilla/5.0'})
  
 # GET request on site URL
 response = urlopen(url).read()
@@ -14,8 +15,6 @@ response = urlopen(url).read()
 currentHash = hashlib.sha224(response).hexdigest()
 
 toaster = ToastNotifier()
-
-toaster.show_toast(title="Static Dress", msg="BigCartel webstore has been updated", threaded=True, duration=10)
 
 print("Script started")
 
@@ -32,7 +31,10 @@ def pollChanges():
             if newHash != currentHash:
                 print("Site has been updated")
 
-                toaster.show_toast(title="Static Dress", msg="BigCartel webstore has been updated", threaded=True, duration=10)
+                toaster.show_toast(title="UpdateCatcher",
+                    msg="Web page has been updated",
+                    threaded=True,
+                    duration=10)
 
                 runThread = False
 
